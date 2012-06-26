@@ -663,6 +663,9 @@
 		[self sendActionsForControlEvents:UIControlEventValueChanged];
 	}
 #endif
+
+	[self setNeedsDisplay];
+	
 }
 
 - (void)setSegmentedControlStyle:(UISegmentedControlStyle)aStyle
