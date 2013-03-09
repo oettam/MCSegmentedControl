@@ -652,7 +652,14 @@
 
 - (void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex
 {
-	if (selectedSegmentIndex == self.selectedSegmentIndex) return;
+    
+	if (selectedSegmentIndex == self.selectedSegmentIndex && selectedSegmentIndex != UISegmentedControlNoSegment) {
+        //self.selectedSegmentIndex = -1;
+        [super setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        self.selectedSegmentIndex = UISegmentedControlNoSegment;
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
+        return;
+    }
 	
 	[super setSelectedSegmentIndex:selectedSegmentIndex];
 	
@@ -663,9 +670,8 @@
 		[self sendActionsForControlEvents:UIControlEventValueChanged];
 	}
 #endif
-
-	[self setNeedsDisplay];
-	
+    
+    [self setNeedsDisplay];
 }
 
 - (void)setSegmentedControlStyle:(UISegmentedControlStyle)aStyle
