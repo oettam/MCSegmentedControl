@@ -652,7 +652,10 @@
 
 - (void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex
 {
-	if (selectedSegmentIndex == self.selectedSegmentIndex) return;
+	if (selectedSegmentIndex == self.selectedSegmentIndex) {
+        [self setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        return;
+    }
 	
 	[super setSelectedSegmentIndex:selectedSegmentIndex];
 	
