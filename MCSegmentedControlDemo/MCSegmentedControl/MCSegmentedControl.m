@@ -89,8 +89,12 @@
 
 - (BOOL)_mustCustomize
 {
-	return self.segmentedControlStyle == UISegmentedControlStyleBordered
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7) {
+        return self.segmentedControlStyle == UISegmentedControlStyleBordered
 		|| self.segmentedControlStyle == UISegmentedControlStylePlain;
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark - Custom accessors
