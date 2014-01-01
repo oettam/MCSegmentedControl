@@ -89,8 +89,12 @@
 
 - (BOOL)_mustCustomize
 {
-	return self.segmentedControlStyle == UISegmentedControlStyleBordered
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7) {
+        return self.segmentedControlStyle == UISegmentedControlStyleBordered
 		|| self.segmentedControlStyle == UISegmentedControlStylePlain;
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark - Custom accessors
@@ -652,7 +656,10 @@
 
 - (void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex
 {
-	if (selectedSegmentIndex == self.selectedSegmentIndex) return;
+	if (selectedSegmentIndex == self.selectedSegmentIndex) {
+        [self setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        return;
+    }
 	
 	[super setSelectedSegmentIndex:selectedSegmentIndex];
 	
